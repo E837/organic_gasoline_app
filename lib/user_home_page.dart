@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'logo.dart';
 import 'animal.dart';
-import 'custom_alert.dart';
-import 'amount_input.dart';
+import 'user_input.dart';
 import 'delivery_button.dart';
 
 class UserHomePage extends StatefulWidget {
@@ -13,32 +12,16 @@ class UserHomePage extends StatefulWidget {
 
 class _UserHomePageState extends State<UserHomePage> {
   final fillPercent = TextEditingController();
+  double waveHeight = -240;
 
-  Widget get createAlertDialog {
-    //TODO: SET A CONDITION TO PREVENT NUMBERS BIGGER THAN 100
-    if (fillPercent.text.isNotEmpty) {
-      try {
-        return int.parse(fillPercent.text) >= 75
-            ? CustomAlertDialog(
-                title: 'OK!',
-                content: 'we will be right on your door',
-              )
-            : CustomAlertDialog(
-                title: 'Oops!',
-                content: 'hey, your fill percent is below 75%',
-              );
-      } on FormatException {
-        return CustomAlertDialog(
-          title: 'Wrong Value!',
-          content: 'hey, you have entered a wrong value for fill percentage.',
-        );
+  double mapPercentToWaveHeight() {
+    setState(() {
+      if (fillPercent.text.isNotEmpty &&
+          double.parse(fillPercent.text) <= 100) {
+        waveHeight = -1 * (240 - (140 * double.parse(fillPercent.text) / 100));
       }
-    } else {
-      return CustomAlertDialog(
-        title: 'Data needed',
-        content: 'you have not entered the fill percentage yet',
-      );
-    }
+    });
+    return waveHeight;
   }
 
   @override
@@ -50,11 +33,14 @@ class _UserHomePageState extends State<UserHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Logo(),
-            Animal(),
+            Animal(waveHeight),
             SizedBox(height: 10),
-            AmountInput(fillPercent),
+            UserInput(
+              fillPercent,
+              mapPercentToWaveHeight,
+            ),
             SizedBox(height: 40),
-            DeliveryButton(createAlertDialog),
+            DeliveryButton(fillPercent),
           ],
         ),
       ),

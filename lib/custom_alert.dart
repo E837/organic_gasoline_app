@@ -12,7 +12,7 @@ class CustomAlertDialog extends StatelessWidget {
       title: Text(title),
       content: Text(content),
       actions: [
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text('OK'),
         ),

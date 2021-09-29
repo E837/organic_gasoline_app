@@ -56,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
             //     ),
             //   ),
             // ),
-            formFilled ? UserHomePage() : SignUp(isDataSubmitted),
+            // formFilled ? UserHomePage() : SignUp(isDataSubmitted),
+            UserHomePage()
           ],
         ));
   }

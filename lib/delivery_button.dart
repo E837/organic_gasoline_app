@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
 
-class DeliveryButton extends StatelessWidget {
-  final Widget createAlertDialog;
+import 'custom_alert.dart';
 
-  DeliveryButton(this.createAlertDialog);
+class DeliveryButton extends StatelessWidget {
+  final TextEditingController fillPercent;
+
+  Widget createAlertDialog() {
+    //TODO: SET A CONDITION TO PREVENT NUMBERS BIGGER THAN 100
+    if (fillPercent.text.isNotEmpty) {
+      try {
+        return int.parse(fillPercent.text) >= 75
+            ? CustomAlertDialog(
+                title: 'OK!',
+                content: 'we will be right on your door',
+              )
+            : CustomAlertDialog(
+                title: 'Oops!',
+                content: 'hey, your fill percent is below 75%',
+              );
+      } on FormatException {
+        return CustomAlertDialog(
+          title: 'Wrong Value!',
+          content: 'hey, you have entered a wrong value for fill percentage.',
+        );
+      }
+    } else {
+      return CustomAlertDialog(
+        title: 'Data needed',
+        content: 'you have not entered the fill percentage yet',
+      );
+    }
+  }
+
+  DeliveryButton(this.fillPercent);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +45,7 @@ class DeliveryButton extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (_) => createAlertDialog,
+                  builder: (_) => createAlertDialog(),
                 );
               },
               child: Icon(

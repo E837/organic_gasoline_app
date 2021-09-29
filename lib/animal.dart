@@ -9,6 +9,7 @@ class Animal extends StatelessWidget {
         Container(
           width: 200,
           height: 200,
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.amber[100],
             borderRadius: BorderRadius.circular(140),

@@ -51,6 +51,7 @@ class _UserHomePageState extends State<UserHomePage> {
           children: [
             Logo(),
             Animal(),
+            SizedBox(height: 10),
             AmountInput(fillPercent),
             SizedBox(height: 40),
             DeliveryButton(createAlertDialog),

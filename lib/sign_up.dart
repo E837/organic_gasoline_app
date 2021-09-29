@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'sign_up_form.dart';
+import 'logo.dart';
 
 class SignUp extends StatelessWidget {
   final Function isDataSubmitted;
@@ -13,18 +14,7 @@ class SignUp extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: double.infinity,
-          child: Text(
-            'BioDiesel',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'magneto',
-              fontSize: 50,
-              color: Colors.grey[800],
-            ),
-          ),
-        ),
+        Logo(),
         Text('make the world a bit better'),
         SizedBox(height: 30),
         ElevatedButton(

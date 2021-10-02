@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'user_home_screen.dart';
+
 class SignUpForm extends StatefulWidget {
-  final Function submitData;
-
-  SignUpForm(this.submitData);
-
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
@@ -13,12 +11,10 @@ class _SignUpFormState extends State<SignUpForm> {
   var emailInput = TextEditingController();
   var passwordInput = TextEditingController();
   bool isPasswordHidden = true;
+  bool showError = false;
 
   bool get isFormFilled {
-    if (emailInput.text.isNotEmpty && passwordInput.text.isNotEmpty) {
-      return true;
-    }
-    return false;
+    return emailInput.text.isNotEmpty && passwordInput.text.isNotEmpty;
   }
 
   @override
@@ -37,6 +33,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 labelText: 'Email Address',
+                errorText:
+                    showError && emailInput.text.isEmpty ? 'required' : null,
                 prefixIcon: Icon(Icons.email),
               ),
               controller: emailInput,
@@ -50,8 +48,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 labelText: 'Password',
-                //TODO: IMPLEMENT REQUIRED TEXTFIELDS
-                errorText: isFormFilled ? null : 'required',
+                errorText:
+                    showError && passwordInput.text.isEmpty ? 'required' : null,
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   onPressed: () => setState(() {
@@ -67,8 +65,14 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () =>
-                  widget.submitData(emailInput.text, passwordInput.text),
+              onPressed: () => isFormFilled
+                  ? Navigator.of(context).pushNamedAndRemoveUntil(
+                      UserHomeScreen.routeName,
+                      (Route<dynamic> route) => false,
+                    )
+                  : setState(() {
+                      showError = true;
+                    }),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,

@@ -5,20 +5,23 @@ import 'animal.dart';
 import 'user_input.dart';
 import 'delivery_button.dart';
 
-class UserHomePage extends StatefulWidget {
+class UserHomeScreen extends StatefulWidget {
   @override
-  _UserHomePageState createState() => _UserHomePageState();
+  _UserHomeScreenState createState() => _UserHomeScreenState();
 }
 
-class _UserHomePageState extends State<UserHomePage> {
+class _UserHomeScreenState extends State<UserHomeScreen> {
   final fillPercent = TextEditingController();
-  double waveHeight = -240;
+  double waveHeight = -260;
 
   double mapPercentToWaveHeight() {
+    /*-105 is max
+    * -260 is min
+    * 155 is the diff*/
     setState(() {
       if (fillPercent.text.isNotEmpty &&
-          double.parse(fillPercent.text) <= 100) {
-        waveHeight = -1 * (240 - (140 * double.parse(fillPercent.text) / 100));
+          double.parse(fillPercent.text) <= 105) {
+        waveHeight = -1 * (260 - (155 * double.parse(fillPercent.text) / 100));
       }
     });
     return waveHeight;

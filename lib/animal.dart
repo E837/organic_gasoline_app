@@ -48,14 +48,14 @@ class _AnimalState extends State<Animal> {
               children: [
                 AnimatedPositioned(
                   curve: Curves.easeOut,
-                  // -100 for 100 percent
-                  // -240 for 0 percent
+                  // -105 for 100 percent
+                  // -260 for 0 percent
                   bottom: widget.waveHeight,
                   duration: Duration(seconds: 5),
                   right: wavePosition,
                   child: Container(
-                    width: 460,
-                    height: 460,
+                    width: 488,
+                    height: 488,
                     child: Image.asset(
                       'assets/images/sample_wave.png',
                       fit: BoxFit.scaleDown,

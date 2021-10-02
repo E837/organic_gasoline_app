@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'sign_up.dart';
-import 'user_home_page.dart';
+import 'login_screen.dart';
+import 'user_home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MyApp());
 }
 
@@ -56,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
             //     ),
             //   ),
             // ),
-            // formFilled ? UserHomePage() : SignUp(isDataSubmitted),
-            UserHomePage()
+            formFilled ? UserHomeScreen() : LoginScreen(isDataSubmitted),
+            // UserHomePage()
           ],
         ));
   }

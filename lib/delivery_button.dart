@@ -6,13 +6,12 @@ class DeliveryButton extends StatelessWidget {
   final TextEditingController fillPercent;
 
   Widget createAlertDialog() {
-    //TODO: SET A CONDITION TO PREVENT NUMBERS BIGGER THAN 100
     if (fillPercent.text.isNotEmpty) {
       try {
         return int.parse(fillPercent.text) >= 75
             ? CustomAlertDialog(
                 title: 'OK!',
-                content: 'we will be right on your door',
+                content: 'we will come right on your door',
               )
             : CustomAlertDialog(
                 title: 'Oops!',
@@ -49,7 +48,8 @@ class DeliveryButton extends StatelessWidget {
                 );
               },
               child: Icon(
-                Icons.delivery_dining,
+                //why mode_of_travel_outlined not supported?
+                Icons.travel_explore,
                 size: 40,
               ),
             ),

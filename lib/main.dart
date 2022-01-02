@@ -5,6 +5,7 @@ import 'login_screen.dart';
 import 'user_home_screen.dart';
 
 void main() {
+  //TODO: DO ATTRIBUTION FOR DOG ICON USED IN THE APP OR DRAW SOMETHING BY YOURSELF
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
